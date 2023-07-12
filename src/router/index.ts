@@ -1,7 +1,7 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 
-// import ExamView from '../views/ExamView.vue'
+import NewsView from '../views/NewsView.vue'
 
 const routes = [
 	{
@@ -17,12 +17,12 @@ const routes = [
 				component: () =>
 					import(/* webpackChunkName: "home" */ '../views/Home.vue')
 			},
-			// {
-			// 	path: '/exam/:id',
-			// 	name: 'exam',
-			// 	component: ExamView,
-			// 	props: true
-			// },
+			{
+				path: '/news/:id',
+				name: 'news',
+				component: NewsView,
+				props: true
+			},
 			{
 				path: '/:pathMatch(.*)*',
 				name: 'not-found',
