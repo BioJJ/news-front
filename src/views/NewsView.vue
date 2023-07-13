@@ -29,7 +29,7 @@
 			</v-card-text>
 
 			<v-card-actions>
-				<v-btn color="orange"> Ver Mais </v-btn>
+				<v-btn color="orange" @click="openLink(news.url)"> Ver Mais </v-btn>
 			</v-card-actions>
 		</v-card>
 	</main>
@@ -58,8 +58,13 @@ export default defineComponent({
 			news.value = store.getNewsSelected
 		})
 
+		const openLink = (url: string) => {
+			window.open(url, '_blank')
+		}
+
 		return {
-			news
+			news,
+			openLink
 		}
 	}
 })

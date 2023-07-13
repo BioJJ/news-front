@@ -34,9 +34,23 @@
 										{{ user.email }}
 									</p>
 									<v-divider class="my-3"></v-divider>
-									<v-btn rounded variant="text"> Edit Account </v-btn>
+									<v-btn
+										rounded
+										variant="text"
+										@click="openLink('https://github.com/BioJJ')"
+									>
+										GitHub
+									</v-btn>
 									<v-divider class="my-3"></v-divider>
-									<v-btn rounded variant="text"> Disconnect </v-btn>
+									<v-btn
+										rounded
+										variant="text"
+										@click="
+											openLink('https://www.linkedin.com/in/jefferson-coelho/')
+										"
+									>
+										Linkend
+									</v-btn>
 								</div>
 							</v-card-text>
 						</v-card>
@@ -64,9 +78,14 @@ export default defineComponent({
 			email: 'bio.jeffcoelho@gmail.com'
 		})
 
+		const openLink = (url: string) => {
+			window.open(url, '_blank')
+		}
+
 		return {
 			logo,
-			user
+			user,
+			openLink
 		}
 	}
 })

@@ -13,7 +13,7 @@
 			</span>
 		</div>
 
-		<div v-if="articlesList.length > 0">
+		<div v-if="articlesList">
 			<newsLink
 				v-for="news in articlesList"
 				:key="news.id"
@@ -30,7 +30,7 @@
 		</div>
 
 		<div v-else class="flex items-center justify-center h-96">
-			Nenhum teste encontrado
+			Nenhum artigo encontrado
 		</div>
 	</main>
 </template>
