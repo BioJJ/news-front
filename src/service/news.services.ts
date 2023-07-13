@@ -1,12 +1,14 @@
 import { NewsApiResponse } from '@/models/ApiResponse'
 import api from '../helpers/axios'
-import config from '../helpers/config'
-const BASE_URL = config.baseURL
 
+interface NewPagesPayload {
+	page: number
+	pageSize: number
+}
 export default class NewsServices {
-	async listNews() {
+	async listNews(params: NewPagesPayload) {
 		try {
-			const data = await api.get<NewsApiResponse>(`${BASE_URL}`)
+			const data = await api.get<NewsApiResponse>('', { params })
 			return data.data
 		} catch (error) {
 			alert(error)
@@ -15,6 +17,6 @@ export default class NewsServices {
 	}
 
 	fetchNews() {
-		return fetch(`${BASE_URL}`, {})
+		return fetch(``, {})
 	}
 }

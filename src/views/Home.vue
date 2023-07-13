@@ -20,6 +20,7 @@
 				:news="news"
 				class="pt-5 cursor-pointer px-1"
 			/>
+			<v-pagination v-model="page" :length="total"></v-pagination>
 		</div>
 
 		<div v-else class="flex items-center justify-center h-96">
@@ -30,11 +31,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import { mapState } from 'pinia'
-import { newsStore } from '../store/NewsStore.ts'
+import { newsStore } from '../store/NewsStore'
 
 import newsLink from '../components/newsLink.vue'
-import { Article } from '@/models/Article'
+import { Article } from '../models/Article'
 
 const store = newsStore()
 export default defineComponent({
@@ -44,47 +44,36 @@ export default defineComponent({
 	data() {
 		return {
 			isUnanswered: true,
-			newsList: [
-				{
-					id: 1,
-					title: 'Noticia 1',
-					author: 'Pandora'
-				},
-				{
-					id: 2,
-					title: 'Noticia 2',
-					author: 'Freddinho'
-				},
-				{
-					id: 3,
-					title: 'Noticia 3',
-					author: 'Snow'
-				},
-				{
-					id: 4,
-					title: 'Noticia 4',
-					author: 'Brutus'
-				}
-			],
-			articlesList: [] as Article[]
+			articlesList: [] as Article[],
+			pageOfItems: [],
+			page: 1,
+			pageSize: 5
 		}
 	},
-	async mounted() {
-		console.log('O componente foi montado!')
-
-		await store.fetchArticle()
-
-		this.articlesList = await store.getArticles
+	mounted() {
+		this.getNews()
 	},
-	// computed: {
-	// 	...mapState(useQuizStore, ['answered', 'unanswered']),
-	// 	exams() {
-	// 		return this.isUnanswered ? this.unanswered : this.answered
-	// 	}
-	// },
+	computed: {
+		total() {
+			return store.getTotalItens
+		}
+	},
+
+	watch: {
+		page() {
+			this.getNews()
+		}
+	},
+
 	methods: {
 		toggleExam(value: boolean) {
 			this.isUnanswered = value
+		},
+
+		async getNews() {
+			await store.fetchArticle({ page: this.page, pageSize: this.pageSize })
+
+			this.articlesList = store.getArticles
 		}
 	}
 })

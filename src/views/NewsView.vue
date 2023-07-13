@@ -1,5 +1,5 @@
 <template>
-	<main class="mx-4 md:max-w-3xl md:mx-auto flex-1 md:w-full" ref="main">
+	<main class="mx-4 md:mx-auto flex-1 md:w-full" ref="main">
 		<div class="mt-6 grid grid-cols-12">
 			<arrow-left-icon
 				class="self-end col-span-1 cursor-pointer"
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref } from 'vue'
 import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
 import CurrencyUsdIcon from 'vue-material-design-icons/CurrencyUsd.vue'
 import HelpIcon from 'vue-material-design-icons/Help.vue'
