@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div
-			class="rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.3)] p-3 flex justify-between"
+			class="rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.3)] p-3 flex justify-between h-40"
 			@click="$router.push('/news/' + news.id)"
 		>
 			<span class="self-start font-bold">
