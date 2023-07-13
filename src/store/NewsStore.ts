@@ -13,23 +13,29 @@ interface NewPagesPayload {
 export const newsStore = defineStore('news', {
 	state: () => ({
 		articles: [] as Article[],
-		totalItens: 0
+		totalItens: 0,
+		newsSelected: [] as Article[]
 	}),
 	getters: {
 		getArticles: (state) => state.articles,
-		getTotalItens: (state) => state.totalItens
+		getTotalItens: (state) => state.totalItens,
+		getNewsSelected: (state) => state.newsSelected
 	},
 	actions: {
 		async fetchArticle(params: NewPagesPayload) {
 			try {
 				const response = await service.listNews(params)
 				console.log(response)
-				const articles = response.articles as Article[]
-				this.articles = articles
+				this.articles = response?.articles as Article[]
 				this.totalItens = response?.totalResults as number
 			} catch (error) {
 				console.error(error)
 			}
+		},
+
+		fetchNewsSelected(selected: Article[]) {
+			console.log('selected', selected)
+			this.newsSelected = selected
 		}
 	}
 })

@@ -6,41 +6,39 @@
 				@click="$router.back()"
 			/>
 			<span class="flex justify-center col-span-11 font-bold">
-				{{ exam.title }}
+				<!-- {{ news.title }} -->
 			</span>
-		</div>
-		<div class="pt-4">
-			<div
-				class="border-2 rounded-full flex items-center w-fit py-px px-2"
-				:class="{
-					'border-green-600': exam.finishin,
-					'border-gray-400': !exam.finishin
-				}"
-			>
-				<currency-usd-icon size="20" fill-color="#ffba2c" />
-				<span>
-					{{ exam.beetcoins }}
-				</span>
-			</div>
-		</div>
-		<div class="flex justify-between text-xs py-4">
-			<span class="border-2 rounded-full p-px">
-				BeeFree - Orgulho LGBTQIA+
-			</span>
-			<span class="border-2 rounded-full p-px"> Conheça mais do Beedoo </span>
 		</div>
 
-		<hr class="border" />
+		<v-card class="mx-auto" max-width="900">
+			<v-img
+				class="align-end text-white"
+				height="200"
+				:src="news.urlToImage"
+				cover
+			>
+				<v-card-title>{{ news.title }}</v-card-title>
+			</v-img>
+
+			<v-card-subtitle class="pt-4"> {{ news.author }} </v-card-subtitle>
+
+			<v-card-text>
+				<div>{{ news.publishedAt }}</div>
+
+				<div>{{ news.description }}</div>
+			</v-card-text>
+
+			<v-card-actions>
+				<v-btn color="orange"> Ver Mais </v-btn>
+			</v-card-actions>
+		</v-card>
 	</main>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
-import CurrencyUsdIcon from 'vue-material-design-icons/CurrencyUsd.vue'
-import HelpIcon from 'vue-material-design-icons/Help.vue'
-import AlphaXIcon from 'vue-material-design-icons/AlphaX.vue'
-import CheckIcon from 'vue-material-design-icons/Check.vue'
+import { defineComponent, ref, onMounted } from 'vue'
+
+import { newsStore } from '../store/NewsStore'
 
 export default defineComponent({
 	props: {
@@ -49,28 +47,17 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: {
-		ArrowLeftIcon,
-		CurrencyUsdIcon,
-		HelpIcon,
-		AlphaXIcon,
-		CheckIcon
-	},
+	components: {},
 	setup(props) {
-		const exam = ref<any>({
-			id: 1,
-			title: 'Noticia 1',
-			author: 'Pandora',
-			finishin: null,
-			beetcoins: 0
+		const news = ref<any>({})
+		const store = newsStore()
+
+		onMounted(() => {
+			news.value = store.getNewsSelected
 		})
-		const answers = ref<Record<number, number>>({})
-		const totalBeetcoins = ref(0)
 
 		return {
-			exam,
-			answers,
-			totalBeetcoins
+			news
 		}
 	}
 })

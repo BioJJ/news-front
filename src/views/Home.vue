@@ -20,7 +20,13 @@
 				:news="news"
 				class="pt-5 cursor-pointer px-1"
 			/>
-			<v-pagination v-model="page" :length="total"></v-pagination>
+			<v-pagination
+				class="mt-5 mb-5"
+				v-model="page"
+				:length="total"
+				:total-visible="7"
+				rounded="circle"
+			></v-pagination>
 		</div>
 
 		<div v-else class="flex items-center justify-center h-96">

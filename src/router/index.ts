@@ -18,7 +18,7 @@ const routes = [
 					import(/* webpackChunkName: "home" */ '../views/Home.vue')
 			},
 			{
-				path: '/news/:id',
+				path: '/news',
 				name: 'news',
 				component: NewsView,
 				props: true
