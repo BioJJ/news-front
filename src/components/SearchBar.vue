@@ -3,6 +3,7 @@
 		<input
 			class="block pl-32 pr-10 h-full rounded-full"
 			placeholder="Pesquisar Artigos"
+			v-model="q"
 		/>
 		<img
 			src="../assets/logo-news.jpg"
@@ -20,10 +21,30 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import MicIcon from 'vue-material-design-icons/Microphone.vue'
+import { newsStore } from '../store/NewsStore'
 
+const store = newsStore()
 export default defineComponent({
 	components: {
 		MicIcon
+	},
+
+	data() {
+		return { q: '', page: 1, pageSize: 5 }
+	},
+	watch: {
+		q() {
+			this.getSearchNews()
+		}
+	},
+	methods: {
+		async getSearchNews() {
+			await store.fetchSearchArticle({
+				q: this.q,
+				page: this.page,
+				pageSize: this.pageSize
+			})
+		}
 	}
 })
 </script>

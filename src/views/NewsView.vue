@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
-
+import ArrowLeftIcon from 'vue-material-design-icons/ArrowLeft.vue'
 import { newsStore } from '../store/NewsStore'
 
 export default defineComponent({
@@ -47,7 +47,9 @@ export default defineComponent({
 			required: true
 		}
 	},
-	components: {},
+	components: {
+		ArrowLeftIcon
+	},
 	setup(props) {
 		const news = ref<any>({})
 		const store = newsStore()

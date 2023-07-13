@@ -9,7 +9,7 @@
 				}"
 				@click="toggleExam(true)"
 			>
-				Artigos
+				Artigos sobre: {{ search }}
 			</span>
 		</div>
 
@@ -40,7 +40,6 @@ import { defineComponent } from 'vue'
 import { newsStore } from '../store/NewsStore'
 
 import newsLink from '../components/newsLink.vue'
-import { Article } from '../models/Article'
 
 const store = newsStore()
 export default defineComponent({
@@ -50,7 +49,6 @@ export default defineComponent({
 	data() {
 		return {
 			isUnanswered: true,
-			articlesList: [] as Article[],
 			pageOfItems: [],
 			page: 1,
 			pageSize: 5
@@ -62,6 +60,12 @@ export default defineComponent({
 	computed: {
 		total() {
 			return store.getTotalItens
+		},
+		articlesList() {
+			return store.getArticles
+		},
+		search() {
+			return store.getQ
 		}
 	},
 
@@ -77,9 +81,11 @@ export default defineComponent({
 		},
 
 		async getNews() {
-			await store.fetchArticle({ page: this.page, pageSize: this.pageSize })
-
-			this.articlesList = store.getArticles
+			await store.fetchArticle({
+				q: this.search ? this.search : 'apple',
+				page: this.page,
+				pageSize: this.pageSize
+			})
 		}
 	}
 })
