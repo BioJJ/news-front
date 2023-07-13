@@ -1,4 +1,14 @@
-# Vue 3 + TypeScript + Vite
+## News-Front
+Aplicação Vue 3 + TypeScript + Vite + Tailwind para consumir a API: [News API](https://newsapi.org/) - 
+
+### Run Application:
+#### Gerando .env:
+
+- `VITE_API_KEY=: generated in the documentation`
+- `VITE_BASE_URL=: 'https://newsapi.org/v2/everything'`
+
+#### running:
+- `yarn dev` or `npm run dev`
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
